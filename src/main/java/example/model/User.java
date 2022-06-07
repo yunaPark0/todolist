@@ -6,22 +6,25 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+
 @Data
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "todo")
-public class TodoModel {
+public class User {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String userEmail;
 
     @Column(nullable = false)
-    private String title;
-
-    @Column(name = "todoOrder", nullable = false)
-    private Long order;
+    private String userPass;
 
     @Column(nullable = false)
-    private Boolean completed;
+    private String userName;
+
+    private String userGender;
+    private String userLocation;
+    private String userPhone;
+    private String userBirth;
+
 }

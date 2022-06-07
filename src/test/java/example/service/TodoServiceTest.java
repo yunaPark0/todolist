@@ -1,7 +1,7 @@
-package example.service;
+/*package example.service;
 
-import example.model.TodoModel;
-import example.model.TodoRequest;
+import example.model.User;
+import example.model.userRequest;
 import example.service.repository.TodoRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,9 +15,9 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.when;
 
 
@@ -32,43 +32,51 @@ class TodoServiceTest {
 
     @Test
     void add() {
-        when(this.todoRepository.save(any(TodoModel.class)))
+        when(this.todoRepository.save(any(User.class)))
                 .then(AdditionalAnswers.returnsFirstArg());
 
-        TodoRequest expected = new TodoRequest();
-        expected.setTitle("Test Title");
+        userRequest expected = new userRequest();
+        expected.setUserName("Test Name");
 
-        TodoModel actual = this.todoService.add(expected);
+        User actual = this.todoService.add(expected);
 
-        assertEquals(expected.getTitle(), actual.getTitle());
+        assertEquals(expected.getUserName(), actual.getUserName());
     }
 
     @Test
     void searchById() {
-        TodoModel entity = new TodoModel();
-        entity.setId(123L);
-        entity.setTitle("TITLE");
-        entity.setOrder(0L);
-        entity.setCompleted(false);
-        Optional<TodoModel> optional = Optional.of(entity);
+        User entity = new User();
+        entity.setUserEmail("1234@1234.com");
+        entity.setUserPass("12345678@");
+        entity.setUserName("Name");
+        entity.setUserGender("남");
+        entity.setUserLocation("경기");
+        entity.setUserPhone("12345678901");
+        entity.setUserBirth("2001-04-13");
+        Optional<User> optional = Optional.of(entity);
 
-        given(this.todoRepository.findById(anyLong()))
+        given(this.todoRepository.findById(anyString()))
                 .willReturn(optional);
 
-                TodoModel actual = this.todoService.searchById(123L);
-        TodoModel expected =optional.get();
-        assertEquals(expected.getId(), actual.getId());
-        assertEquals(expected.getTitle(), actual.getTitle());
-        assertEquals(expected.getOrder(), actual.getOrder());
-        assertEquals(expected.getCompleted(), actual.getCompleted());
+                User actual = this.todoService.searchById("1234@1234.com");
+        User expected =optional.get();
+        assertEquals(expected.getUserEmail(), actual.getUserEmail());
+        assertEquals(expected.getUserPass(), actual.getUserPass());
+        assertEquals(expected.getUserName(), actual.getUserName());
+        assertEquals(expected.getUserGender(), actual.getUserGender());
+        assertEquals(expected.getUserLocation(), actual.getUserLocation());
+        assertEquals(expected.getUserPhone(), actual.getUserPhone());
+        assertEquals(expected.getUserBirth(), actual.getUserBirth());
+
+
     }
 
     @Test
     public void searchByIdFailed() {
-        given(this.todoRepository.findById(anyLong()))
+        given(this.todoRepository.findById(anyString()))
                 .willReturn(Optional.empty());
         assertThrows(ResponseStatusException.class, () -> {
-            this.todoService.searchById(123L);
+            this.todoService.searchById("1234@1234.com");
         });
     }
-}
+}*/

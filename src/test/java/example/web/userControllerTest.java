@@ -1,8 +1,8 @@
-package example.web;
+/*package example.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import example.model.TodoModel;
-import example.model.TodoRequest;
+import example.model.User;
+import example.model.userRequest;
 import example.service.TodoService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,8 +18,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
-@WebMvcTest(TodoController.class)
-class TodoControllerTest {
+@WebMvcTest(userController.class)
+class userControllerTest {
 
     @Autowired
     MockMvc mvc;
@@ -27,31 +27,37 @@ class TodoControllerTest {
     @MockBean
     TodoService todoService;
 
-    private TodoModel expected;
+    private User expected;
 
     @BeforeEach
     void setup() {
-        this.expected = new TodoModel();
-        this.expected.setId(123L);
-        this.expected.setTitle("TEST TITLE");
-        this.expected.setOrder(0L);
-        this.expected.setCompleted(false);
+        this.expected = new User();
+        this.expected.setUserEmail("1234@1234.com");
+        this.expected.setUserPass("12345678@");
+        this.expected.setUserName("Name");
+        this.expected.setUserGender("남");
+        this.expected.setUserLocation("경기");
+        this.expected.setUserPhone("12345678901");
+        this.expected.setUserBirth("2001-04-13");
     }
 
     @Test
     void create() throws Exception{
-        when(this.todoService.add(any(TodoRequest.class)))
+        when(this.todoService.add(any(userRequest.class)))
                 .then((i) -> {
-                    TodoRequest request = i.getArgument(0, TodoRequest.class);
-                    return new TodoModel(this.expected.getId(),
-                            request.getTitle(),
-                            this.expected.getOrder(),
-                            this.expected.getCompleted()
+                    userRequest request = i.getArgument(0, userRequest.class);
+                    return new User(this.expected.getUserEmail(),
+                            request.getUserName(),
+                            this.expected.getUserPass(),
+                            this.expected.getUserGender(),
+                            this.expected.getUserLocation(),
+                            this.expected.getUserPhone(),
+                            this.expected.getUserBirth()
                     );
                 });
 
-        TodoRequest request = new TodoRequest();
-        request.setTitle("ANY TITLE");
+        userRequest request = new userRequest();
+        request.setUserName("ANY Name");
 
         ObjectMapper mapper = new ObjectMapper();
         String content = mapper.writeValueAsString(request);
@@ -66,4 +72,4 @@ class TodoControllerTest {
     @Test
     void readOne() {
     }
-}
+}*/
