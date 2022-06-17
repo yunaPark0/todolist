@@ -3,6 +3,7 @@ package example.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 @Data
 @NoArgsConstructor
@@ -10,7 +11,7 @@ import lombok.NoArgsConstructor;
 public class userResponse {
     private String userEmail;
     private String userPass;
-    private String userName;
+    private String name;
 
     private String userGender;
     private String userLocation;
@@ -19,7 +20,7 @@ public class userResponse {
     public userResponse(User user) {
         this.userEmail = user.getUserEmail();
         this.userPass = user.getUserPass();
-        this.userName = user.getUserName();
+        this.name = user.getName();
         this.userGender = user.getUserGender();
         this.userLocation = user.getUserLocation();
         this.userPhone = user.getUserPhone();
